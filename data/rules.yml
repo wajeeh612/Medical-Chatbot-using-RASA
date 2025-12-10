@@ -1,0 +1,35 @@
+version: "3.1"
+
+rules:
+  # Activate user details form when user says yes
+  - rule: Activate user details form
+    steps:
+    - intent: affirm
+    - action: user_details_form
+    - active_loop: user_details_form
+
+
+  - rule: Submit user details form
+    condition:
+    - active_loop: user_details_form
+    steps:
+    - action: user_details_form
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+    - action: action_store_user_details
+    - action: utter_demographic_info
+    - action: symptoms_details_form
+    - active_loop: symptoms_details_form
+
+
+  - rule: Submit symptoms details form
+    condition:
+    - active_loop: symptoms_details_form
+    steps:
+    - action: symptoms_details_form
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+    - action: utter_privacy_notice
+    - action: utter_goodbye

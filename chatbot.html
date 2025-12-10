@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Animate messages on appearance */
+.msg {
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 15px;
+    max-width: 70%;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.5s forwards;
+}
+
+@keyframes fadeSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typing indicator */
+.typing {
+    background: rgba(255,255,255,0.15);
+    align-self: flex-start;
+    border-radius: 15px;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.4;
+    font-style: italic;
+    color: #eee;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.typing-dots span {
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-8px); }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    color: white;
+    position: relative;
+    background: linear-gradient(120deg, #004aad, #6a00ff, #0097b2);
+    background-size: 300% 300%;
+    animation: gradientBG 12s infinite ease-in-out;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.title {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    text-align: center;
+    font-size: 75px;
+    font-family: 'Bakbak One', sans-serif;
+    font-weight: 400;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    animation: fadeIn 2s ease;
+    letter-spacing: 3px;
+}
+
+.description {
+    position: absolute;
+    top: 33%;
+    width: 38%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+#chatbot-button {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+#chatbot-button:hover { transform: scale(1.1); }
+#chatbot-button img { width: 40px; }
+
+#chat-window {
+    position: fixed;
+    bottom: 120px;
+    right: 40px;
+    width: 350px;
+    height: 450px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    display: none;
+    flex-direction: column;
+    animation: popUp 0.3s ease;
+}
+
+@keyframes popUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bot {
+    background: rgba(255,255,255,0.25);
+    align-self: flex-start;
+}
+
+.user {
+    background: rgba(0,0,0,0.5);
+    align-self: flex-end;
+    color: white;
+}
+
+#input-area {
+    display: flex;
+    gap: 10px;
+}
+
+#user-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+#send-btn {
+    padding: 10px 14px;
+    border: none;
+    background: #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#user-input:disabled, #send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
+</head>
+<body>
+
+<div class="title">AI MEDICAL ASSISTANT</div>
+<div class="description">
+    An AI-powered Medical Assistant built with Python and RASA by Wajeeh Ullah that helps users record their medical data, and can suggest urgent care in emergencies.
+</div>
+
+<div id="chatbot-button">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png">
+</div>
+
+<div id="chat-window">
+    <div id="messages"></div>
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button id="send-btn">Send</button>
+    </div>
+</div>
+
+<script>
+// Generate session ID
+let conversationId = sessionStorage.getItem('medbot_session');
+if (!conversationId) {
+    conversationId = "patient_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
+    sessionStorage.setItem('medbot_session', conversationId);
+}
+console.log("Current Session ID:", conversationId);
+
+const chatButton = document.getElementById("chatbot-button");
+const chatWindow = document.getElementById("chat-window");
+const messages = document.getElementById("messages");
+const sendBtn = document.getElementById("send-btn");
+const userInput = document.getElementById("user-input");
+
+let conversationEnded = false;
+let greetingSent = false;
+let isProcessing = false; // Prevent sending while bot is typing
+
+chatButton.onclick = () => {
+    chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+
+    if (!greetingSent && chatWindow.style.display === "flex") {
+        addMessageWithDelay("Hello! I am MedBot 🤖.", "bot");
+        greetingSent = true;
+    }
+};
+
+// Updated sendMessage to handle conversation end
+async function sendMessage() {
+    const text = userInput.value.trim();
+    if (!text || conversationEnded || isProcessing) return;
+
+    addMessage(text, "user");
+    userInput.value = "";
+    isProcessing = true;
+    userInput.disabled = true;
+    sendBtn.disabled = true;
+
+    try {
+        const response = await fetch("http://localhost:5005/webhooks/rest/webhook", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ sender: conversationId, message: text })
+        });
+
+        const data = await response.json();
+
+        // Add messages one by one with delays
+        await addMultipleMessagesWithDelay(data);
+
+        // Check if conversation ended
+        const lastMsg = data[data.length - 1];
+        if (lastMsg && lastMsg.text === "Thank you for sharing your information. Take care and have a good day! 👋") {
+            conversationEnded = true;
+            userInput.placeholder = "Conversation ended. Please refresh.";
+        } else {
+            userInput.disabled = false;
+            sendBtn.disabled = false;
+            isProcessing = false;
+        }
+
+    } catch (err) {
+        console.error(err);
+        addMessage("Error connecting to bot. Is the RASA server running?", "bot");
+        userInput.disabled = false;
+        sendBtn.disabled = false;
+        isProcessing = false;
+    }
+}
+
+sendBtn.onclick = sendMessage;
+userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+});
+
+function addMessage(text, sender) {
+    const div = document.createElement("div");
+    div.classList.add("msg", sender);
+    div.innerText = text;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const div = document.createElement("div");
+    div.classList.add("typing");
+    div.id = "typing-indicator";
+    div.innerHTML = `
+        MedBot is typing
+        <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    `;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const indicator = document.getElementById("typing-indicator");
+    if (indicator) indicator.remove();
+}
+
+async function addMessageWithDelay(text, sender, delay = 1000) {
+    showTypingIndicator();
+    await new Promise(resolve => setTimeout(resolve, delay));
+    hideTypingIndicator();
+    addMessage(text, sender);
+}
+
+async function addMultipleMessagesWithDelay(messages) {
+    for (let i = 0; i < messages.length; i++) {
+        const msg = messages[i];
+        if (msg.text) {
+            // Calculate delay based on message length (simulate typing speed)
+            const baseDelay = 300;
+            const typingDelay = Math.min(msg.text.length * 10, 1250); // Max 2s
+            const totalDelay = baseDelay + typingDelay;
+
+            await addMessageWithDelay(msg.text, "bot", totalDelay);
+        }
+    }
+}
+</script>
+
+</body>
+</html>

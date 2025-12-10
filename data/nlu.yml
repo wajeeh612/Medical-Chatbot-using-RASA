@@ -1,0 +1,372 @@
+version: "3.1"
+
+nlu:
+
+# Greetings
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - hello there
+    - good morning
+    - good afternoon
+    - good evening
+    - hey there
+    - hi there
+    - greetings
+    - howdy
+    - what's up
+    - yo
+    - hi bot
+    - hello bot
+
+# Affirm
+- intent: affirm
+  examples: |
+    - yes
+    - sure
+    - okay
+    - yes please
+    - yup
+    - sure thing
+    - yeah
+    - yep
+    - absolutely
+    - of course
+    - yes, definitely
+    - yep, sure
+    - ok
+    - alright
+    - sounds good
+
+# Deny
+- intent: deny
+  examples: |
+    - no
+    - not now
+    - maybe later
+    - never
+    - not really
+    - not at this time
+    - nope
+    - nah
+    - no thanks
+    - not interested
+    - I don't want to
+    - not right now
+    - no way
+    - negative
+    - I'd rather not
+
+# Provide name
+- intent: provide_name
+  examples: |
+    - [Ahmed Ali](name)
+    - My name is [John](name)
+    - I am [Sarah](name)
+    - [Ali Khan](name)
+    - [Fatima Ahmed](name)
+    - [John Smith](name)
+    - [Maria Garcia](name)
+    - [Ali](name)
+    - [Bilal](name)
+    - [Asim](name)
+    - [Hassan](name)
+    - [Ayesha](name)
+    - its [Omar](name)
+    - call me [Zara](name)
+    - I'm [Muhammad](name)
+    - [Usman Ahmed](name)
+    - [Sara Khan](name)
+    - my name's [David](name)
+    - [Emma](name)
+    - [Michael Brown](name)
+    - I'm [Daniel](name)
+    - people call me [Zain](name)
+    - you can call me [Haseeb](name)
+    - it's [Noor Fatima](name)
+    - I'm known as [Khan](name)
+    - the name is [Rebecca](name)
+    - [Christopher Walker](name)
+    - [Jason Miller](name)
+    - [Jessica Lee](name)
+    - [Sophia Johnson](name)
+    - [James Anderson](name)
+    - [Robert Wilson](name)
+    - [William Taylor](name)
+    - [Ethan Clark](name)
+    - [Olivia Martin](name)
+    - [Isabella Thompson](name)
+    - [Lucas White](name)
+    - [Mason Harris](name)
+    - [Jacob Young](name)
+    - [Emily Scott](name)
+    - [Ava Allen](name)
+    - [Jacob Martin](name)
+    - [Ayaan Khan](name)
+    - [Hisham](name)
+    - [Imran Ali](name)
+    - [Khalid Mehmood](name)
+    - [Farhan Siddiqui](name)
+    - [Sana Malik](name)
+    - [Arisha](name)
+    - [Nimra Ahmed](name)
+    - [Laiba Khan](name)
+    - [Hiba](name)
+    - [Zainab Fatima](name)
+    - [Yusuf](name)
+    - [Ibrahim](name)
+    - [Rafay](name)
+    - [Arman Malik](name)
+    - [Noman](name)
+    - [Rehan](name)
+    - [Saad](name)
+    - [Tariq Hussain](name)
+    - [Jonathan Reed](name)
+    - [Andrew Cooper](name)
+    - [Mark Reynolds](name)
+    - my name is actually [Aaron](name)
+    - I go by [Henry](name)
+    - just [Adam](name)
+    - it's simply [Leo](name)
+    - hey, it's [Sofia](name)
+
+- intent: provide_age
+  examples: |
+    - [25](age)
+    - [30](age)
+    - I am [28](age)
+    - [45](age) years old
+    - [twenty five](age)
+    - [35](age)
+    - [22](age)
+    - [18](age)
+    - [fifty](age)
+    - I'm [32](age)
+    - [40](age) years
+    - my age is [27](age)
+    - [19](age)
+    - [sixty five](age)
+    - [55](age)
+    - I'm [29](age)
+    - [33](age)
+    - [21](age)
+    - [37](age)
+    - [44](age)
+    - [50](age)
+    - I'm [31](age)
+    - [38](age)
+    - [26](age)
+    - [24](age)
+    - [36](age)
+    - [41](age)
+    - [23](age)
+    - [34](age)
+    - [42](age)
+    - [20](age)
+    - [39](age)
+    - [43](age)
+    - [46](age)
+    - [47](age)
+    - [48](age)
+    - [49](age)
+    - [51](age)
+    - [52](age)
+    - [53](age)
+    - [54](age)
+    - [56](age)
+    - [57](age)
+    - [58](age)
+    - [59](age)
+    - [60](age)
+    - [25](age)
+    - I am [30](age)
+    - [twenty eight](age)
+    - I'm [45](age) years old
+    - [fifty](age)
+    - My age is [32](age)
+    - [eighteen](age)
+    - I'm [22](age)
+    - [thirty five](age)
+    - I am [40](age)
+    - [sixty five](age)
+    - I am [19](age)
+    - [55](age)
+    - [twenty one](age)
+    - I'm [37](age) years old
+    - My age is [29](age)
+    - [twenty six](age)
+    - I'm [41](age)
+    - [forty four](age)
+    - [33](age)
+    - [twenty three](age)
+    - I am [38](age)
+    - [42](age)
+    - I'm [20](age)
+    - [thirty nine](age)
+    - [43](age)
+    - I am [46](age)
+    - [forty seven](age)
+    - I'm [48](age)
+    - My age is [49](age)
+    - [51](age)
+    - I am [52](age)
+    - [fifty three](age)
+    - I'm [54](age)
+    - [56](age)
+    - [fifty seven](age)
+    - I am [58](age)
+    - [59](age)
+    - [sixty](age)
+    - I'm [61](age)
+    - [sixty two](age)
+    - I am [63](age)
+    - [sixty four](age)
+    - I'm [65](age)
+
+# Provide gender
+- intent: provide_gender
+  examples: |
+    - [male](gender)
+    - [female](gender)
+    - [M](gender)
+    - [F](gender)
+    - [man](gender)
+    - [woman](gender)
+    - [boy](gender)
+    - [girl](gender)
+    - I am [male](gender)
+    - I am [female](gender)
+    - I am [boy](gender)
+    - I am [girl](gender)
+    - [m](gender)
+    - [f](gender)
+    - [Male](gender)
+    - [Female](gender)
+    - I'm a [man](gender)
+    - I'm a [male](gender)
+    - I'm a [female](gender)
+    - [gentleman](gender)
+    - [lady](gender)
+    - I identify as [male](gender)
+    - I identify as [female](gender)
+    - I am a [male](gender)
+    - I am a [female](gender)
+
+    
+
+# Provide location
+- intent: provide_location
+  examples: |
+    - [Karachi](location)
+    - I live in [Lahore](location)
+    - [Islamabad](location)
+    - [New York](location)
+    - [London](location)
+    - from [Peshawar](location)
+    - [Rawalpindi](location)
+    - I'm from [Dubai](location)
+    - [Multan](location)
+    - [Faisalabad](location)
+    - living in [Toronto](location)
+    - [Manchester](location)
+    - I'm in [Quetta](location)
+    - [Chicago](location)
+    - [Sydney](location)
+    - [Karachi, Pakistan](location)
+    - [Berlin](location)
+    - [Paris](location)
+    - [Rome](location)
+    - [Madrid](location)
+    - [Amsterdam](location)
+    - [Oslo](location)
+    - [Stockholm](location)
+    - [Tokyo](location)
+    - [Beijing](location)
+    - [Seoul](location)
+    - [Melbourne](location)
+    - [Vancouver](location)
+    - [Montreal](location)
+    - [Kuwait City](location)
+    - [Riyadh](location)
+    - [Doha](location)
+    - [Muscat](location)
+    - [Jeddah](location)
+    - [Karachi, Sindh](location)
+    - [Lahore, Punjab](location)
+    - [Islamabad, ICT](location)
+    - [Birmingham](location)
+    - [Dublin](location)
+    - [Lisbon](location)
+    - [Prague](location)
+    - [Warsaw](location)
+    - [Budapest](location)
+
+# Provide occupation
+- intent: provide_occupation
+  examples: |
+    - [software engineer](occupation)
+    - I am a [teacher](occupation)
+    - [doctor](occupation)
+    - [student](occupation)
+    - [engineer](occupation)
+    - [nurse](occupation)
+    - [businessman](occupation)
+    - [accountant](occupation)
+    - I work as a [lawyer](occupation)
+    - [pharmacist](occupation)
+    - I'm a [designer](occupation)
+    - [banker](occupation)
+    - [architect](occupation)
+    - [manager](occupation)
+    - [consultant](occupation)
+    - [pilot](occupation)
+    - [chef](occupation)
+    - [journalist](occupation)
+    - [writer](occupation)
+    - [artist](occupation)
+    - [musician](occupation)
+    - [developer](occupation)
+    - [researcher](occupation)
+    - [scientist](occupation)
+    - [technician](occupation)
+    - [programmer](occupation)
+    - [photographer](occupation)
+    - [actor](occupation)
+    - [director](occupation)
+    - [professor](occupation)
+    - [translator](occupation)
+    - [social worker](occupation)
+    - [coach](occupation)
+    - [trainer](occupation)
+    - [managerial staff](occupation)
+    - [HR specialist](occupation)
+    - [content creator](occupation)
+    - [designer (UX/UI)](occupation)
+    - [marketing specialist](occupation)
+    - [sales executive](occupation)
+    - [data analyst](occupation)
+    - [AI engineer](occupation)
+    - [civil engineer](occupation)
+    - [mechanical engineer](occupation)
+    - [electrical engineer](occupation)
+
+# Goodbye
+- intent: goodbye
+  examples: |
+    - goodbye
+    - bye
+    - take care
+    - see you later
+    - bye bye
+    - have a good day
+    - see ya
+    - catch you later
+    - talk to you later
+    - gotta go
+    - thanks bye
+    - farewell
+    - peace out
+    - ciao
+    - adios

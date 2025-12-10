@@ -1,0 +1,184 @@
+version: "3.1"
+
+intents:
+  - greet
+  - affirm
+  - deny
+  - provide_name
+  - provide_age
+  - provide_gender
+  - provide_location
+  - provide_occupation
+  - medical_symptoms
+  - goodbye
+
+entities:
+  - name
+  - age
+  - gender
+  - location
+  - occupation
+
+
+forms:
+  user_details_form:
+    required_slots:
+      - name
+      - age
+      - gender
+      - location
+      - occupation
+      - medical_history
+
+
+  symptoms_details_form:
+    required_slots:
+      - medical_symptoms
+
+slots:
+  name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: name
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: name
+      - type: from_text
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: name
+
+  age:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: age
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: age
+      - type: from_text
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: age
+
+  gender:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: gender
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: gender
+      - type: from_text
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: gender
+
+  location:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: location
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: location
+      - type: from_text
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: location
+
+  occupation:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: occupation
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: occupation
+      - type: from_text
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: occupation
+
+  medical_history:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_details_form
+            requested_slot: medical_history
+
+  patient_id:
+    type: text
+    mappings:
+      - type: custom
+
+  medical_symptoms:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: symptoms_details_form
+            requested_slot: medical_symptoms
+
+
+responses:
+  utter_ask_permission:
+    - text: "I'll help you record your medical information. Shall we start?"
+
+  utter_ask_name:
+    - text: "What is your name?"
+
+  utter_ask_age:
+    - text: "Thanks! {name} what is your age?"
+
+  utter_ask_gender:
+    - text: "What is your gender?"
+
+  utter_ask_location:
+    - text: "Where are you located?"
+
+  utter_ask_occupation:
+    - text: "What is your occupation?"
+
+  utter_ask_medical_history:
+    - text: "Do you have any medical history or past conditions?"
+
+  utter_demographic_info:
+    - text: "We have successfully collected your demographic information."
+
+  utter_ask_medical_symptoms:
+    - text: "Now I would like to ask you about your medical information.\n\nPlease list the symptoms, their duration and also their severity."
+
+  utter_privacy_notice:
+    - text: "Your information is stored securely. Only authorized healthcare providers can access your data."
+
+  utter_emergency:
+    - text: "⚠️ URGENT: Based on your symptoms, please seek immediate medical attention. Visit the nearest hospital or call emergency services as soon as possible."
+
+  utter_goodbye:
+    - text: "Thank you for sharing your information. Take care and have a good day! 👋"
+
+  utter_invalid_name:
+    - text: "Please provide a valid name (letters only)."
+
+  utter_invalid_age:
+    - text: "Please provide a valid age between 1 and 120."
+
+  utter_invalid_gender:
+    - text: "Please provide your gender as: male or female."
+
+  utter_invalid_location:
+    - text: "Please provide a valid location (letters only)."
+
+  utter_default:
+    - text: "I didn't understand that. Could you please answer the question?"
+
+
+
+
+actions:
+    - validate_user_details_form
+    - validate_symptoms_details_form
+    - action_store_user_details

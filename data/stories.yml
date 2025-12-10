@@ -1,0 +1,13 @@
+version: "3.1"
+
+stories:
+
+# Denial for info
+- story: Denial for info
+  steps:
+  - intent: greet
+  - action: utter_ask_permission
+  - intent: deny
+  - action: utter_goodbye
+
+
